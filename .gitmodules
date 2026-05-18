@@ -1,0 +1,3 @@
+[submodule "node_modules/tree-sitter-java-manifest"]
+	path = node_modules/tree-sitter-java-manifest
+	url = https://github.com/impure0xntk/tree-sitter-java-manifest.git

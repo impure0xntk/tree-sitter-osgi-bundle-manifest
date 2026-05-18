@@ -1,0 +1,1451 @@
+==================================
+Basic OSGi Bundle Headers
+==================================
+
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-SymbolicName: com.example.mybundle
+Bundle-Version: 1.2.3.SNAPSHOT
+Bundle-Name: My Bundle
+
+---
+
+(manifest
+  (main_section
+    (attribute_entry
+      value: (manifest_version))
+    (attribute_entry
+      value: (bundle_manifest_version
+        (number)))
+    (attribute_entry
+      value: (bundle_symbolic_name
+        (symbolic_name)))
+    (attribute_entry
+      value: (bundle_version
+        (version
+          (number)
+          (number)
+          (number)
+          (version_qualifier))))
+    (attribute_entry
+      value: (bundle_name))))
+
+==================================
+Import-Package with Clauses
+==================================
+
+Import-Package: com.example.foo;version="1.0.0",com.example.bar;version="[2.0,3.0)"
+
+---
+
+(manifest
+  (main_section
+    (attribute_entry
+      value: (clause_values
+        (clauses
+          (clause
+            (path)
+            (parameter
+              (attribute
+                (path)
+                (parameter_value))))
+          (clause
+            (path)
+            (parameter
+              (attribute
+                (path)
+                (parameter_value)))))))))
+
+==================================
+Bundle-Version with Qualifier
+==================================
+
+Bundle-Version: 2.1.0.SNAPSHOT
+
+---
+
+(manifest
+  (main_section
+    (attribute_entry
+      value: (bundle_version
+        (version
+          (number)
+          (number)
+          (number)
+          (version_qualifier))))))
+
+==================================
+Bundle-License (SPDX identifier)
+==================================
+
+Bundle-License: Apache-2.0;link="http://opensource.org/licenses/apache2.0.php"
+
+---
+
+(manifest
+  (main_section
+    (attribute_entry
+      value: (bundle_license
+        (license_clause
+          (license_identifier)
+          (license_attr
+            (directive_or_attribute
+              (attribute
+                (path)
+                (parameter_value)))))))))
+
+==================================
+Bundle-License: <<EXTERNAL>> placeholder
+==================================
+
+Bundle-License: <<EXTERNAL>>
+
+---
+
+(manifest
+  (main_section
+    (attribute_entry
+      value: (bundle_license))))
+
+==================================
+Bundle-License: multiple SPDX identifiers
+==================================
+
+Bundle-License: Apache-2.0,MIT;link="https://opensource.org/licenses/MIT"
+
+---
+
+(manifest
+  (main_section
+    (attribute_entry
+      value: (bundle_license
+        (license_clause
+          (license_identifier))
+        (license_clause
+          (license_identifier)
+          (license_attr
+            (directive_or_attribute
+              (attribute
+                (path)
+                (parameter_value)))))))))
+
+==================================
+Bundle-NativeCode
+==================================
+
+Bundle-NativeCode: lib/linux/x86_64/libnative.so;osname=Linux;processor=x86_64
+
+---
+
+(manifest
+  (main_section
+    (attribute_entry
+      value: (bundle_native_code
+        (native_code_clause
+          (path)
+          (native_code_attr
+            (directive_or_attribute
+              (attribute
+                (path)
+                (parameter_value))))
+          (native_code_attr
+            (directive_or_attribute
+              (attribute
+                (path)
+                (parameter_value)))))))))
+
+==================================
+Bundle-Developers
+==================================
+
+Bundle-Developers: pkriens;email="pkriens@osgialliance.org";name="Peter Kriens";organization="OSGi Alliance"
+
+---
+
+(manifest
+  (main_section
+    (attribute_entry
+      value: (bundle_developers
+        (developer_clause
+          (developer_identifier)
+          (developer_attr
+            (directive_or_attribute
+              (attribute
+                (path)
+                (parameter_value))))
+          (developer_attr
+            (directive_or_attribute
+              (attribute
+                (path)
+                (parameter_value))))
+          (developer_attr
+            (directive_or_attribute
+              (attribute
+                (path)
+                (parameter_value)))))))))
+
+==================================
+Bundle-SCM
+==================================
+
+Bundle-SCM: url=https://github.com/osgi/osgi,connection=scm:git:https://github.com/osgi/osgi.git
+
+---
+
+(manifest
+  (main_section
+    (attribute_entry
+      value: (bundle_scm
+        (scm_attr
+          (attribute
+            (path)
+            (parameter_value)))
+        (scm_attr
+          (attribute
+            (path)
+            (parameter_value)))))))
+
+==================================
+Require-Capability with Filter
+==================================
+
+Require-Capability: osgi.ee;filter:="(&(osgi.ee=JavaSE)(version=17))"
+
+---
+
+(manifest
+  (main_section
+    (attribute_entry
+      value: (capability_values
+        (capabilities
+          (capability
+            (clause
+              (path)
+              (parameter
+                (directive
+                  (path)
+                  (parameter_value))))))))))
+
+==================================
+Export-Package with Directives
+==================================
+
+Export-Package: org.osgi.framework;version="1.8.0";uses:="org.osgi.resource,org.osgi.framework"
+
+---
+
+(manifest
+  (main_section
+    (attribute_entry
+      value: (clause_values
+        (clauses
+          (clause
+            (path)
+            (parameter
+              (attribute
+                (path)
+                (parameter_value)))
+            (parameter
+              (directive
+                (path)
+                (parameter_value)))))))))
+
+==================================
+Multi-line Continuation (Import-Package)
+==================================
+
+Import-Package: com.acme.foo;version="1.0.0",
+ com.acme.bar;version="[2.0,3.0)"
+
+---
+
+(manifest
+  (main_section
+    (attribute_entry
+      value: (clause_values
+        (clauses
+          (clause
+            (path)
+            (parameter
+              (attribute
+                (path)
+                (parameter_value))))
+          (clause
+            (path)
+            (parameter
+              (attribute
+                (path)
+                (parameter_value)))))))))
+
+==================================
+Multi-line Provide-Capability
+==================================
+
+Provide-Capability: com.acme.dict;from=nl;
+ to=de;version:Version=1.2
+
+---
+
+(manifest
+  (main_section
+    (attribute_entry
+      value: (capability_values
+        (capabilities
+          (capability
+            (clause
+              (path)
+              (parameter
+                (attribute
+                  (path)
+                  (parameter_value)))
+              (parameter
+                (attribute
+                  (path)
+                  (parameter_value)))
+              (parameter
+                (typed_attribute
+                  (path)
+                  (parameter_value))))))))))
+
+==================================
+Bundle-ActivationPolicy
+==================================
+
+Bundle-ActivationPolicy: lazy
+
+---
+
+(manifest
+  (main_section
+    (attribute_entry
+      value: (bundle_activation_policy))))
+
+==================================
+Bundle-Activator
+==================================
+
+Bundle-Activator: com.acme.fw.Activator
+
+---
+
+(manifest
+  (main_section
+    (attribute_entry
+      value: (bundle_activator))))
+
+==================================
+Bundle-Icon
+==================================
+
+Bundle-Icon: /icons/acme-logo.png;size=64
+
+---
+
+(manifest
+  (main_section
+    (attribute_entry
+      value: (bundle_icon
+        (icon_clause
+          (icon_path)
+          (icon_param
+            (icon_attr
+              (icon_attr_key)
+              (icon_attr_value))))))))
+
+==================================
+Fragment-Host
+==================================
+
+Fragment-Host: org.eclipse.swt;bundle-version="[3.0.0,4.0.0)"
+
+---
+
+(manifest
+  (main_section
+    (attribute_entry
+      value: (fragment_host
+        (clause
+          (path)
+          (parameter
+            (attribute
+              (path)
+              (parameter_value))))))))
+
+==================================
+Bundle-UpdateLocation
+==================================
+
+Bundle-UpdateLocation: http://www.acme.com/Firewall/bundle.jar
+
+---
+
+(manifest
+  (main_section
+    (attribute_entry
+      value: (bundle_update_location))))
+
+==================================
+Bundle-Copyright
+==================================
+
+Bundle-Copyright: OSGi (c) 2002
+
+---
+
+(manifest
+  (main_section
+    (attribute_entry
+      value: (bundle_copyright))))
+
+==================================
+Require-Bundle
+==================================
+
+Require-Bundle: com.acme.chess;bundle-version="[1.0,2.0)";visibility:=reexport
+
+---
+
+(manifest
+  (main_section
+    (attribute_entry
+      value: (require_bundle
+        (clause
+          (path)
+          (parameter
+            (attribute
+              (path)
+              (parameter_value)))
+          (parameter
+            (directive
+              (path)
+              (parameter_value))))))))
+
+==================================
+Require-Capability with multi-line filter
+==================================
+
+Require-Capability: osgi.ee;
+ filter:="(&(osgi.ee=JavaSE)(version=17))"
+
+---
+
+(manifest
+  (main_section
+    (attribute_entry
+      value: (capability_values
+        (capabilities
+          (capability
+            (clause
+              (path)
+              (parameter
+                (directive
+                  (path)
+                  (parameter_value))))))))))
+
+==================================
+Import-Package: multiple ;-separated package names
+==================================
+
+Import-Package: org.osgi.util.tracker;org.osgi.service.log;version=1.4
+
+---
+
+(manifest
+  (main_section
+    (attribute_entry
+      value: (clause_values
+        (clauses
+          (clause
+            (path)
+            (path)
+            (parameter
+              (attribute
+                (path)
+                (parameter_value)))))))))
+
+==================================
+Export-Package: multiple ;-separated package names
+==================================
+
+Export-Package: org.osgi.framework;org.osgi.service.packageadmin;version="1.9"
+
+---
+
+(manifest
+  (main_section
+    (attribute_entry
+      value: (clause_values
+        (clauses
+          (clause
+            (path)
+            (path)
+            (parameter
+              (attribute
+                (path)
+                (parameter_value)))))))))
+
+==================================
+Bundle-SymbolicName: singleton directive
+==================================
+
+Bundle-SymbolicName: com.acme.foo;singleton:=true
+
+---
+
+(manifest
+  (main_section
+    (attribute_entry
+      value: (bundle_symbolic_name
+        (symbolic_name)
+        (symbolic_name_parameter
+          (directive_or_attribute
+            (directive
+              (path)
+              (parameter_value))))))))
+
+==================================
+Bundle-SymbolicName: fragment-attachment never
+==================================
+
+Bundle-SymbolicName: com.acme.frag;fragment-attachment:=never
+
+---
+
+(manifest
+  (main_section
+    (attribute_entry
+      value: (bundle_symbolic_name
+        (symbolic_name)
+        (symbolic_name_parameter
+          (directive_or_attribute
+            (directive
+              (path)
+              (parameter_value))))))))
+
+==================================
+Bundle-SymbolicName: mandatory directive
+==================================
+
+Bundle-SymbolicName: com.acme.foo;mandatory:="foo,bar"
+
+---
+
+(manifest
+  (main_section
+    (attribute_entry
+      value: (bundle_symbolic_name
+        (symbolic_name)
+        (symbolic_name_parameter
+          (directive_or_attribute
+            (directive
+              (path)
+              (parameter_value))))))))
+
+==================================
+Bundle-SymbolicName: multiple parameters
+==================================
+
+Bundle-SymbolicName: com.acme.foo;singleton:=true;fragment-attachment:=never
+
+---
+
+(manifest
+  (main_section
+    (attribute_entry
+      value: (bundle_symbolic_name
+        (symbolic_name)
+        (symbolic_name_parameter
+          (directive_or_attribute
+            (directive
+              (path)
+              (parameter_value))))
+        (symbolic_name_parameter
+          (directive_or_attribute
+            (directive
+              (path)
+              (parameter_value))))))))
+
+==================================
+DynamicImport-Package: multiple wildcard names
+==================================
+
+DynamicImport-Package: com.acme.plugin.*;com.foo.service.*
+
+---
+
+(manifest
+  (main_section
+    (attribute_entry
+      value: (dynamic_import_package
+        (dynamic_import_clause
+          (wildcard_name)
+          (wildcard_name))))))
+
+==================================
+DynamicImport-Package: wildcard with parameter
+==================================
+
+DynamicImport-Package: *;resolution:=optional,com.acme.*;version="2.0"
+
+---
+
+(manifest
+  (main_section
+    (attribute_entry
+      value: (dynamic_import_package
+        (dynamic_import_clause
+          (wildcard_name)
+          (dynamic_import_attribute
+            (directive
+              (path)
+              (parameter_value))))
+        (dynamic_import_clause
+          (wildcard_name)
+          (dynamic_import_attribute
+            (attribute
+              (path)
+              (parameter_value))))))))
+
+==================================
+Require-Bundle: multiple bundle names
+==================================
+
+Require-Bundle: com.acme.chess;com.acme.log;bundle-version="[2,3)"
+
+---
+
+(manifest
+  (main_section
+    (attribute_entry
+      value: (require_bundle
+        (clause
+          (path)
+          (path)
+          (parameter
+            (attribute
+              (path)
+              (parameter_value))))))))
+
+==================================
+Provide-Capability: typed attribute (version:Version=)
+==================================
+
+Provide-Capability: com.acme.dict;from=nl;to=de;version:Version=1.2
+
+---
+
+(manifest
+  (main_section
+    (attribute_entry
+      value: (capability_values
+        (capabilities
+          (capability
+            (clause
+              (path)
+              (parameter
+                (attribute
+                  (path)
+                  (parameter_value)))
+              (parameter
+                (attribute
+                  (path)
+                  (parameter_value)))
+              (parameter
+                (typed_attribute
+                  (path)
+                  (parameter_value))))))))))
+
+==================================
+Provide-Capability: uses directive (comma-separated quoted value)
+==================================
+
+Provide-Capability: osgi.service;objectClass=org.foo.Bar;uses:="org.foo,org.bar"
+
+---
+
+(manifest
+  (main_section
+    (attribute_entry
+      value: (capability_values
+        (capabilities
+          (capability
+            (clause
+              (path)
+              (parameter
+                (attribute
+                  (path)
+                  (parameter_value)))
+              (parameter
+                (directive
+                  (path)
+                  (parameter_value))))))))))
+
+==================================
+Require-Capability: resolution, cardinality, effective, filter
+==================================
+
+Require-Capability: osgi.service;effective:=active;filter:="(objectClass=org.foo.Bar)";resolution:=mandatory;cardinality:=single
+
+---
+
+(manifest
+  (main_section
+    (attribute_entry
+      value: (capability_values
+        (capabilities
+          (capability
+            (clause
+              (path)
+              (parameter
+                (directive
+                  (path)
+                  (parameter_value)))
+              (parameter
+                (directive
+                  (path)
+                  (parameter_value)))
+              (parameter
+                (directive
+                  (path)
+                  (parameter_value)))
+              (parameter
+                (directive
+                  (path)
+                  (parameter_value))))))))))
+
+==================================
+Require-Capability: typed attribute with filter
+==================================
+
+Require-Capability: osgi.wiring.package;filter:="(osgi.wiring.package=com.acme.foo)";version:Version="[1.0,2.0)"
+
+---
+
+(manifest
+  (main_section
+    (attribute_entry
+      value: (capability_values
+        (capabilities
+          (capability
+            (clause
+              (path)
+              (parameter
+                (directive
+                  (path)
+                  (parameter_value)))
+              (parameter
+                (typed_attribute
+                  (path)
+                  (parameter_value))))))))))
+
+==================================
+Provide-Capability: List<String> typed attribute
+==================================
+
+Provide-Capability: com.acme.seps;tokens:List<String>="\\,,;,\\\""
+
+---
+
+(manifest
+  (main_section
+    (attribute_entry
+      value: (capability_values
+        (capabilities
+          (capability
+            (clause
+              (path)
+              (parameter
+                (typed_attribute
+                  (path)
+                  (parameter_value))))))))))
+
+==================================
+Provide-Capability: bare List with scalar type param
+==================================
+
+Provide-Capability: com.acme.dict;version:List<Version>="1.0,2.0"
+
+---
+
+(manifest
+  (main_section
+    (attribute_entry
+      value: (capability_values
+        (capabilities
+          (capability
+            (clause
+              (path)
+              (parameter
+                (typed_attribute
+                  (path)
+                  (parameter_value))))))))))
+
+==================================
+Provide-Capability: bare List type (default String element)
+==================================
+
+Provide-Capability: com.acme.dict;country:List="nl,be,fr"
+
+---
+
+(manifest
+  (main_section
+    (attribute_entry
+      value: (capability_values
+        (capabilities
+          (capability
+            (clause
+              (path)
+              (parameter
+                (typed_attribute
+                  (path)
+                  (parameter_value))))))))))
+
+==================================
+Bundle-RequiredExecutionEnvironment: simple
+==================================
+
+Bundle-RequiredExecutionEnvironment: JavaSE-17
+
+---
+
+(manifest
+  (main_section
+    (attribute_entry
+      value: (bree
+        (bree_clause
+          (bree_token)
+          (bree_version_suffix
+            (number)))))))
+
+==================================
+Bundle-RequiredExecutionEnvironment: composite
+==================================
+
+Bundle-RequiredExecutionEnvironment: CDC-1.0/Foundation-1.0
+
+---
+
+(manifest
+  (main_section
+    (attribute_entry
+      value: (bree
+        (bree_clause
+          (bree_token)
+          (bree_version_suffix
+            (number)
+            (number))
+          (bree_sub_ee
+            (bree_token)
+            (number)
+            (number)))))))
+
+==================================
+Bundle-RequiredExecutionEnvironment: OSGi/Minimum
+==================================
+
+Bundle-RequiredExecutionEnvironment: OSGi/Minimum-1.2
+
+---
+
+(manifest
+  (main_section
+    (attribute_entry
+      value: (bree
+        (bree_clause
+          (bree_token)
+          (bree_sub_ee
+            (bree_token)
+            (number)
+            (number)))))))
+
+==================================
+Bundle-RequiredExecutionEnvironment: multiple
+==================================
+
+Bundle-RequiredExecutionEnvironment: JavaSE-17,OSGi/Minimum-1.2
+
+---
+
+(manifest
+  (main_section
+    (attribute_entry
+      value: (bree
+        (bree_clause
+          (bree_token)
+          (bree_version_suffix
+            (number)))
+        (bree_clause
+          (bree_token)
+          (bree_sub_ee
+            (bree_token)
+            (number)
+            (number)))))))
+
+==================================
+Service-Component: single path
+==================================
+
+Service-Component: OSGI-INF/component.xml
+
+---
+
+(manifest
+  (main_section
+    (attribute_entry
+      value: (service_component
+        (path)))))
+
+==================================
+Service-Component: multiple paths
+==================================
+
+Service-Component: OSGI-INF/component.xml,OSGI-INF/activator.xml
+
+---
+
+(manifest
+  (main_section
+    (attribute_entry
+      value: (service_component
+        (path)
+        (path)))))
+
+==================================
+Multi-Release: true
+==================================
+
+Multi-Release: true
+
+---
+
+(manifest
+  (main_section
+    (attribute_entry
+      value: (multi_release))))
+
+==================================
+Multi-Release: false
+==================================
+
+Multi-Release: false
+
+---
+
+(manifest
+  (main_section
+    (attribute_entry
+      value: (multi_release))))
+
+==================================
+Provide-Capability osgi.ee with version:List<Version>
+==================================
+
+Provide-Capability: osgi.ee;osgi.ee=JavaSE;version:List<Version>="1.2,1.3"
+
+---
+
+(manifest
+  (main_section
+    (attribute_entry
+      value: (capability_values
+        (capabilities
+          (capability
+            (clause
+              (path)
+              (parameter
+                (attribute
+                  (path)
+                  (parameter_value)))
+              (parameter
+                (typed_attribute
+                  (path)
+                  (parameter_value))))))))))
+
+==================================
+Provide-Capability osgi.ee multiple EE versions
+==================================
+
+Provide-Capability: osgi.ee;osgi.ee="OSGi/Minimum";version:List<Version>="1.0,1.1,1.2",osgi.ee;osgi.ee="JavaSE";version:List<Version>="1.2,1.3,1.4,1.5,1.6"
+
+---
+
+(manifest
+  (main_section
+    (attribute_entry
+      value: (capability_values
+        (capabilities
+          (capability
+            (clause
+              (path)
+              (parameter
+                (attribute
+                  (path)
+                  (parameter_value)))
+              (parameter
+                (typed_attribute
+                  (path)
+                  (parameter_value)))))
+          (capability
+            (clause
+              (path)
+              (parameter
+                (attribute
+                  (path)
+                  (parameter_value)))
+              (parameter
+                (typed_attribute
+                  (path)
+                  (parameter_value))))))))))
+
+==================================
+Provide-Capability osgi.native namespace
+==================================
+
+Provide-Capability: osgi.native;osgi.native.osname:List<String>="Windows7,Windows 7,Win7,Win32";osgi.native.osversion:Version="7.0";osgi.native.processor:List<String>="x86-64,amd64,em64t,x86_64";osgi.native.language="en"
+
+---
+
+(manifest
+  (main_section
+    (attribute_entry
+      value: (capability_values
+        (capabilities
+          (capability
+            (clause
+              (path)
+              (parameter
+                (typed_attribute
+                  (path)
+                  (parameter_value)))
+              (parameter
+                (typed_attribute
+                  (path)
+                  (parameter_value)))
+              (parameter
+                (typed_attribute
+                  (path)
+                  (parameter_value)))
+              (parameter
+                (attribute
+                  (path)
+                  (parameter_value))))))))))
+
+==================================
+Provide-Capability osgi.identity namespace
+==================================
+
+Provide-Capability: osgi.identity;osgi.identity=org.example.foo;type="osgi.bundle";version:Version="1.0.0"
+
+---
+
+(manifest
+  (main_section
+    (attribute_entry
+      value: (capability_values
+        (capabilities
+          (capability
+            (clause
+              (path)
+              (parameter
+                (attribute
+                  (path)
+                  (parameter_value)))
+              (parameter
+                (attribute
+                  (path)
+                  (parameter_value)))
+              (parameter
+                (typed_attribute
+                  (path)
+                  (parameter_value))))))))))
+
+==================================
+Require-Capability osgi.identity with classifier and filter
+==================================
+
+Require-Capability: osgi.identity;filter:="(&(osgi.identity=org.example.foo-source)(version=1.1))";effective:=meta;classifier:=sources;resolution:=optional
+
+---
+
+(manifest
+  (main_section
+    (attribute_entry
+      value: (capability_values
+        (capabilities
+          (capability
+            (clause
+              (path)
+              (parameter
+                (directive
+                  (path)
+                  (parameter_value)))
+              (parameter
+                (directive
+                  (path)
+                  (parameter_value)))
+              (parameter
+                (directive
+                  (path)
+                  (parameter_value)))
+              (parameter
+                (directive
+                  (path)
+                  (parameter_value))))))))))
+
+==================================
+Require-Capability osgi.ee filter with version
+==================================
+
+Require-Capability: osgi.ee;filter:="(&(osgi.ee=JavaSE)(version=1.6))"
+
+---
+
+(manifest
+  (main_section
+    (attribute_entry
+      value: (capability_values
+        (capabilities
+          (capability
+            (clause
+              (path)
+              (parameter
+                (directive
+                  (path)
+                  (parameter_value))))))))))
+
+==================================
+Eclipse-PlatformFilter
+==================================
+
+Eclipse-PlatformFilter: (& (osgi.ws=win32) (osgi.os=win32) (osgi.arch=x86))
+
+---
+
+(manifest
+  (main_section
+    (attribute_entry
+      value: (eclipse_platform_filter))))
+
+==================================
+Eclipse-BuddyPolicy: single
+==================================
+
+Eclipse-BuddyPolicy: dependent
+
+---
+
+(manifest
+  (main_section
+    (attribute_entry
+      value: (eclipse_buddy_policy
+        (buddy_policy_token)))))
+
+==================================
+Eclipse-BuddyPolicy: multiple
+==================================
+
+Eclipse-BuddyPolicy: dependent,global,registered
+
+---
+
+(manifest
+  (main_section
+    (attribute_entry
+      value: (eclipse_buddy_policy
+        (buddy_policy_token)
+        (buddy_policy_token)
+        (buddy_policy_token)))))
+
+==================================
+Eclipse-RegisterBuddy
+==================================
+
+Eclipse-RegisterBuddy: org.eclipse.foo.bundle1, org.eclipse.foo.bundle2
+
+---
+
+(manifest
+  (main_section
+    (attribute_entry
+      value: (eclipse_register_buddy))))
+
+==================================
+Eclipse-ExtensibleAPI: true
+==================================
+
+Eclipse-ExtensibleAPI: true
+
+---
+
+(manifest
+  (main_section
+    (attribute_entry
+      value: (eclipse_extensible_api))))
+
+==================================
+Eclipse-ExtensibleAPI: false
+==================================
+
+Eclipse-ExtensibleAPI: false
+
+---
+
+(manifest
+  (main_section
+    (attribute_entry
+      value: (eclipse_extensible_api))))
+
+==================================
+Eclipse-BundleShape: jar
+==================================
+
+Eclipse-BundleShape: jar
+
+---
+
+(manifest
+  (main_section
+    (attribute_entry
+      value: (eclipse_bundle_shape))))
+
+==================================
+Eclipse-BundleShape: dir
+==================================
+
+Eclipse-BundleShape: dir
+
+---
+
+(manifest
+  (main_section
+    (attribute_entry
+      value: (eclipse_bundle_shape))))
+
+==================================
+Spring-Context: single path
+==================================
+
+Spring-Context: config/account-data-context.xml
+
+---
+
+(manifest
+  (main_section
+    (attribute_entry
+      value: (spring_context))))
+
+==================================
+Spring-Context: multiple paths
+==================================
+
+Spring-Context: config/account-data-context.xml, config/account-security-context.xml
+
+---
+
+(manifest
+  (main_section
+    (attribute_entry
+      value: (spring_context))))
+
+==================================
+Spring-Context: with create-asynchronously directive
+==================================
+
+Spring-Context: *;create-asynchronously:=false
+
+---
+
+(manifest
+  (main_section
+    (attribute_entry
+      value: (spring_context))))
+
+==================================
+Spring-Context: multiple files and directives
+==================================
+
+Spring-Context: config/account-data-context.xml;create-asynchronously:=true, config/security.xml;config/logging.xml
+
+---
+
+(manifest
+  (main_section
+    (attribute_entry
+      value: (spring_context))))
+
+==================================
+Spring-Context: wildcard with directives
+==================================
+
+Spring-Context: *;create-asynchronously:=true;timeout:=60
+
+---
+
+(manifest
+  (main_section
+    (attribute_entry
+      value: (spring_context))))
+
+==================================
+SpringExtender-Version
+==================================
+
+SpringExtender-Version: [2.0,3.0)
+
+---
+
+(manifest
+  (main_section
+    (attribute_entry
+      value: (spring_extender_version))))
+
+==================================
+Private-Package
+==================================
+
+Private-Package: com.acme.internal, com.acme.impl;version="1.0"
+
+---
+
+(manifest
+  (main_section
+    (attribute_entry
+      value: (clause_values
+        (clauses
+          (clause
+            (path))
+          (clause
+            (path)
+            (parameter
+              (attribute
+                (path)
+                (parameter_value)))))))))
+
+==================================
+Include-Resource: single
+==================================
+
+Include-Resource: lib/somelib.jar
+
+---
+
+(manifest
+  (main_section
+    (attribute_entry
+      value: (include_resource))))
+
+==================================
+Include-Resource: multiple with parameters
+==================================
+
+Include-Resource: src/main/resources;lib=true, lib/foo.jar;literal=bar
+
+---
+
+(manifest
+  (main_section
+    (attribute_entry
+      value: (include_resource))))
+
+==================================
+Export-Package with x-internal directive
+==================================
+
+Export-Package: org.eclipse.core.runtime;x-internal:=true
+
+---
+
+(manifest
+  (main_section
+    (attribute_entry
+      value: (clause_values
+        (clauses
+          (clause
+            (path)
+            (parameter
+              (directive
+                (path)
+                (parameter_value)))))))))
+
+==================================
+Export-Package with x-friends directive
+==================================
+
+Export-Package: org.eclipse.core.runtime;x-friends:="com.example.foo,com.example.bar"
+
+---
+
+(manifest
+  (main_section
+    (attribute_entry
+      value: (clause_values
+        (clauses
+          (clause
+            (path)
+            (parameter
+              (directive
+                (path)
+                (parameter_value)))))))))
+
+==================================
+Export-Package with x-internal and x-friends combined
+==================================
+
+Export-Package: org.eclipse.core.runtime;x-internal:=true;x-friends:="com.example.foo"
+
+---
+
+(manifest
+  (main_section
+    (attribute_entry
+      value: (clause_values
+        (clauses
+          (clause
+            (path)
+            (parameter
+              (directive
+                (path)
+                (parameter_value)))
+            (parameter
+              (directive
+                (path)
+                (parameter_value)))))))))
+
+==================================
+Ignore-Package
+==================================
+
+Ignore-Package: com.sun.*, javax.xml.*
+
+---
+
+(manifest
+  (main_section
+    (attribute_entry
+      value: (ignore_package))))
+
+==================================
+Provide-Capability osgi.wiring.package namespace
+==================================
+
+Provide-Capability: osgi.wiring.package;osgi.wiring.package=com.acme.foo;version:Version="1.0"
+
+---
+
+(manifest
+  (main_section
+    (attribute_entry
+      value: (capability_values
+        (capabilities
+          (capability
+            (clause
+              (path)
+              (parameter
+                (attribute
+                  (path)
+                  (parameter_value)))
+              (parameter
+                (typed_attribute
+                  (path)
+                  (parameter_value))))))))))
